@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+    <form action="speakspeech">
+        <table>
+            <tr></tr>
+                <td>
+                    <label>
+                        Translated text is:
+                    </label>
+                </td>
+                <td>
+                    <input type="text" value={{text}} name="transtext" id="transtext"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        phonitical pronunciation is:
+                    </label>
+                </td>
+                <td>
+                    <input type="text" value={{pronunciation}} name="pronun"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>
+                        Destination language is:
+                    </label>
+                </td>
+                <td>
+                <input type="text" value={{destlanguage}} name="destlangu"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <select>
+                        {% for i in destlang%}
+                        <option>
+                            {{i}}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="submit" value="convert it into speech" id="submitbtn"/>
+                    <script>
+                        const textarea = document.querySelector("#transtext"),
+                voiceList = document.querySelector("select"),
+                speechBtn = document.querySelector("#submitbtn");
+                
+                let synth = speechSynthesis,
+                isSpeaking = true;
+                
+                /*voices();
+                
+                function voices(){
+                    lst=[];
+                for(let voice of synth.getVoices()){
+                    let selected = voice.name === "Google US English" ? "selected" : "";
+                    let option = `<option ${selected}>${voice.name} (${voice.lang})</option>`;
+                    voiceList.insertAdjacentHTML("beforeend", option);
+                    lst=[...lst,voice.name];
+                }
+                console.log(lst);
+                }
+                
+                synth.addEventListener("voiceschanged", voices);*/
+                
+                function textToSpeech(text){
+                let utterance = new SpeechSynthesisUtterance(text);
+                for(let voice of synth.getVoices()){
+                    if(voice.name === voiceList.value){
+                        utterance.voice = voice;
+                    }
+                }
+                synth.speak(utterance);
+                }
+                
+                speechBtn.addEventListener("click", e =>{
+                e.preventDefault();
+                if(textarea.value !== ""){
+                    if(!synth.speaking){
+                        textToSpeech(textarea.value);
+                    }
+                    if(textarea.value.length > 80){
+                        setInterval(()=>{
+                            if(!synth.speaking && !isSpeaking){
+                                isSpeaking = true;
+                                speechBtn.innerText = "Convert To Speech";
+                            }else{
+                            }
+                        }, 500);
+                        if(isSpeaking){
+                            synth.resume();
+                            isSpeaking = false;
+                            speechBtn.innerText = "Pause Speech";
+                        }else{
+                            synth.pause();
+                            isSpeaking = true;
+                            speechBtn.innerText = "Resume Speech";
+                        }
+                    }else{
+                        speechBtn.innerText = "Convert To Speech";
+                    }
+                }
+                });
+                    </script>
+                </td>
+            </tr>
+        </table>
+        
+    </form>
+</body>
+</html>
