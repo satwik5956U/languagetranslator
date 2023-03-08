@@ -16,6 +16,7 @@ def translate(request):
     ind=lst.index(str(request.GET['lang']))
     cod=lst[ind]
     global out
+    source=t.detect(str(request.GET['inptext'])).lang
     out=t.translate(request.GET['inptext'],dest=cod)
     lst3=[
     "Microsoft David - English (United States)",
@@ -334,9 +335,13 @@ def translate(request):
         if des.lower() in i.lower():
             lst4+=[i]
             flag=True
+    outtxt=str(out.text)
+    outtxt=outtxt.replace(" ","_")
+    prono=str(out.pronunciation)
+    prono=prono.replace(" ","_")
     if not flag:
         lst4=["this language can't be spelled out as it is but you could try in other formats"]
-    return render(request,'output.html',{'text':out.text,'pronunciation':out.pronunciation,'destlanguage':request.GET['lang'],'destlang':lst4})
+    return render(request,'output.html',{'text':outtxt,'source':d[source],'destlanguage':request.GET['lang'],'destlang':lst4})
 #import gtts
 """def speakspeech(request):
     lst1=list(d.keys())
@@ -350,3 +355,39 @@ def translate(request):
     we.save("del.wav")
     #playsound("del.wav")
     return render(request,"<audio src='del.wav' autoplay></audio>")"""
+"""This application cant spell following languages
+armenian
+basque
+belarusian
+cebuano
+chichewa
+chinese (simplified)
+chinese (traditional)
+corsican
+esperanto
+frisian
+haitian creole
+hausa
+hawaiian
+hmong
+igbo
+kurdish (kurmanji)
+kyrgyz
+latin
+luxembourgish
+malagasy
+maori
+myanmar (burmese)
+punjabi
+samoan
+scots gaelic
+sesotho
+shona
+sindhi
+tajik
+uyghur
+xhosa
+yiddish
+yoruba
+But you could read them by text
+"""

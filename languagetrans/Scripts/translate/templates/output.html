@@ -24,11 +24,11 @@
             <tr>
                 <td>
                     <label>
-                        phonitical pronunciation is:
+                        Source language
                     </label>
                 </td>
                 <td>
-                    <input type="text" value={{pronunciation}} name="pronun"/>
+                    <input type="text" disabled value={{source}} name="source"/>
                 </td>
             </tr>
             <tr>
@@ -79,6 +79,9 @@
                 synth.addEventListener("voiceschanged", voices);*/
                 
                 function textToSpeech(text){
+                    for(var i=0;i<100;i++){
+                        text=text.replace("_"," ");
+                    }
                 let utterance = new SpeechSynthesisUtterance(text);
                 for(let voice of synth.getVoices()){
                     if(voice.name === voiceList.value){
