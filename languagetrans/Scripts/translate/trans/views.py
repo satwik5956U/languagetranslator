@@ -18,6 +18,13 @@ def translate(request):
     global out
     source=t.detect(str(request.GET['inptext'])).lang
     out=t.translate(request.GET['inptext'],dest=cod)
+    stri=out.text
+    lst55=list(stri.split('\n'))
+    stri=""
+    for i in lst55:
+        stri+=(" "+i.rstrip("\r"))
+    print(lst55)
+    print(stri)
     lst3=[
     "Microsoft David - English (United States)",
     "Microsoft Ravi - English (India)",
@@ -335,7 +342,7 @@ def translate(request):
         if des.lower() in i.lower():
             lst4+=[i]
             flag=True
-    outtxt=str(out.text)
+    outtxt=str(stri)
     outtxt=outtxt.replace(" ","_")
     prono=str(out.pronunciation)
     prono=prono.replace(" ","_")

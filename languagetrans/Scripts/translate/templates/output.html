@@ -101,21 +101,21 @@
                         setInterval(()=>{
                             if(!synth.speaking && !isSpeaking){
                                 isSpeaking = true;
-                                speechBtn.innerText = "Convert To Speech";
+                                speechBtn.value = "Convert To Speech";
                             }else{
                             }
                         }, 500);
                         if(isSpeaking){
                             synth.resume();
                             isSpeaking = false;
-                            speechBtn.innerText = "Pause Speech";
+                            speechBtn.value = "Pause Speech";
                         }else{
                             synth.pause();
                             isSpeaking = true;
-                            speechBtn.innerText = "Resume Speech";
+                            speechBtn.value = "Resume Speech";
                         }
                     }else{
-                        speechBtn.innerText = "Convert To Speech";
+                        speechBtn.value = "Convert To Speech";
                     }
                 }
                 });
