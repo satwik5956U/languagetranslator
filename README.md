@@ -22,3 +22,6 @@ This Django application offers translation to more than 100 languages, accepting
    ```bash
    python manage.py runserver
 this Django application serves as a versatile translation tool capable of translating text to over 100 languages. It provides users with the flexibility to input text or voice, delivering output in both textual and spoken forms. By leveraging the power of Django, it offers a seamless and user-friendly experience, empowering individuals to overcome language barriers effectively. Whether for personal, educational, or professional use, this application stands as a valuable resource for facilitating communication across diverse linguistic contexts.
+
+# Deployment
+The application is deployed at [language translator](https://languagetranslator-6ehb.onrender.com/)
