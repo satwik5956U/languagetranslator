@@ -1,7 +1,7 @@
 # languagetranslator
 This Django application offers translation to more than 100 languages, accepting input in either text or voice format, and provides output in both text and speech.
 
-## cloning
+## Cloning
 1. clone the repository
    ```bash
    git clone https://github.com/satwik5956U/languagetranslator.git
